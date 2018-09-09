@@ -13,6 +13,9 @@ import java.time.ZoneOffset;
 public class DateTimeConverter {
     @TypeConverter
     public static LocalDateTime fromTimestamp(long value) {
+        if (value == 0L) {
+            return null;
+        }
         return LocalDateTime.ofInstant(
                 Instant.ofEpochMilli(value),
                 ZoneOffset.UTC.normalized());
@@ -20,6 +23,6 @@ public class DateTimeConverter {
 
     @TypeConverter
     public static long toTimestamp(LocalDateTime date) {
-        return date.toEpochSecond(ZoneOffset.UTC);
+        return date.toInstant(ZoneOffset.UTC).toEpochMilli();
     }
 }

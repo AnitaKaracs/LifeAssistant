@@ -17,5 +17,8 @@ public interface CleaningDutyDao {
     LiveData<List<CleaningDuty>> getAll();
 
     @Update(onConflict = OnConflictStrategy.IGNORE)
-    void update(CleaningDuty director);
+    void update(CleaningDuty cleaningDuty);
+
+    @Query("UPDATE cleaning_duties SET checked = 0, checked_time = null")
+    void resetChecklist();
 }

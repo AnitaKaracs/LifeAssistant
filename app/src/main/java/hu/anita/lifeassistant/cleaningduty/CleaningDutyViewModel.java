@@ -24,4 +24,8 @@ public class CleaningDutyViewModel extends AndroidViewModel {
     public LiveData<List<CleaningDuty>> getCleaningDuties() {
         return cleaningDuties;
     }
+
+    public void updateCleaningDuty(CleaningDuty cleaningDuty) {
+        cleaningDutyDao.update(cleaningDuty);
+    }
 }

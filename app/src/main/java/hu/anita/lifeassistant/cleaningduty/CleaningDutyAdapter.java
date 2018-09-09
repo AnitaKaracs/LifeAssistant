@@ -1,25 +1,35 @@
 package hu.anita.lifeassistant.cleaningduty;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import hu.anita.lifeassistant.R;
 import hu.anita.lifeassistant.db.CleaningDuty;
+import hu.anita.lifeassistant.db.CleaningDutyDao;
+import hu.anita.lifeassistant.db.CleaningDutyDatabase;
 
 public class CleaningDutyAdapter extends RecyclerView.Adapter<CleaningDutyAdapter.CleaningDutyViewHolder> {
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd. HH:mm");
     private LayoutInflater layoutInflater;
+    private CleaningDutyDao cleaningDutyDao;
     private List<CleaningDuty> cleaningDutyList;
     private Context context;
 
     public CleaningDutyAdapter(Context context) {
         this.layoutInflater = LayoutInflater.from(context);
         this.context = context;
+        this.cleaningDutyDao = CleaningDutyDatabase.getDatabase(context).cleaningDutyDao();
     }
 
     public void setCleaningDutyList(List<CleaningDuty> cleaningDutyList) {
@@ -47,16 +57,51 @@ public class CleaningDutyAdapter extends RecyclerView.Adapter<CleaningDutyAdapte
         final CleaningDuty cleaningDuty = cleaningDutyList.get(position);
         if (cleaningDuty != null) {
             holder.cleaningDutyButton.setId(cleaningDuty.id);
-            holder.cleaningDutyButton.setText(cleaningDuty.name);
+            holder.cleaningDutyButton.setText(getCleaningDutyLabel(cleaningDuty));
+            holder.cleaningDutyButton.setChecked(cleaningDuty.checked);
             holder.cleaningDutyButton.setEnabled(!cleaningDuty.checked);
-            /*holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    *//*DialogFragment dialogFragment = MovieSaveDialogFragment.newInstance(movie.title, directorFullName);
-                    dialogFragment.show(((AppCompatActivity) context).getSupportFragmentManager(), TAG_DIALOG_MOVIE_SAVE);*//*
+            holder.cleaningDutyButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                if (isChecked && buttonView.getId() == cleaningDuty.id && !cleaningDuty.checked) {
+                    /*DialogFragment dialogFragment = DirectorSaveDialogFragment.newInstance(director.fullName);
+                    dialogFragment.show(((AppCompatActivity) context).getSupportFragmentManager(), TAG_DIALOG_DIRECTOR_SAVE);*/
+
+                    new AlertDialog.Builder(context)
+                            .setTitle(R.string.cleaning_duty_dialog_title)
+                            .setMessage(context.getString(R.string.cleaning_duty_dialog_message, cleaningDuty.name))
+                            .setPositiveButton(R.string.cleaning_duty_dialog_yes, (dialog, whichButton) -> {
+                                cleaningDuty.checkedTime = LocalDateTime.now();
+                                cleaningDuty.checked = true;
+                                cleaningDutyDao.update(cleaningDuty);
+
+                                boolean allDone = cleaningDutyList.stream().allMatch(duty -> duty.checked);
+                                if (allDone) {
+                                    cleaningDutyDao.resetChecklist();
+                                    Toast.makeText(context, R.string.cleaning_duty_dialog_done, Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(context, R.string.cleaning_duty_dialog_yes_toast, Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                            .setNegativeButton(R.string.cleaning_duty_dialog_no,
+                                (dialog, whichButton) -> buttonView.setChecked(false))
+                            .show();
                 }
-            });*/
+            });
         }
+    }
+
+    @NonNull
+    private String getCleaningDutyLabel(CleaningDuty cleaningDuty) {
+        String cleaningDutyLabelPart = "";
+        if (cleaningDuty.checked) {
+            if (cleaningDuty.checkedTime != null) {
+                cleaningDutyLabelPart = context.getString(R.string.cleaning_duty_checked, cleaningDuty.checkedTime.format(formatter));
+            }
+        } else {
+            if (cleaningDuty.timeRequiredMin != null && cleaningDuty.timeRequiredMin > 0) {
+                cleaningDutyLabelPart = context.getString(R.string.cleaning_duty_unchecked, cleaningDuty.timeRequiredMin.toString());
+            }
+        }
+        return context.getString(R.string.cleaning_duty_label, cleaningDuty.name, cleaningDutyLabelPart);
     }
 
     @Override

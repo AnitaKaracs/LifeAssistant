@@ -12,6 +12,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity(tableName = "cleaning_duties")
 public class CleaningDuty {
@@ -36,4 +37,18 @@ public class CleaningDuty {
     @TypeConverters({DateTimeConverter.class})
     @Nullable
     public LocalDateTime checkedTime;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CleaningDuty that = (CleaningDuty) o;
+        return id == that.id &&
+                checked == that.checked;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, checked);
+    }
 }

@@ -22,6 +22,8 @@ public abstract class CleaningDutyDatabase extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = RoomAsset.databaseBuilder(context.getApplicationContext(),
                             CleaningDutyDatabase.class, DB_NAME)
+                            .allowMainThreadQueries()
+                            //TODO remove, create dialog fragment
                             .build();
                 }
             }

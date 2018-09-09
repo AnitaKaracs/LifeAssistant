@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Life Assistant</string>
+    <string name="cleaning_duty_unchecked">- %s perc</string>
+    <string name="cleaning_duty_checked">(%s)</string>
+    <string name="cleaning_duty_label">%s %s</string>
+    <string name="cleaning_duty_dialog_title">Napi házimunka</string>
+    <string name="cleaning_duty_dialog_message">Meg is vagy a %s takarításával?</string>
+    <string name="cleaning_duty_dialog_yes">Igen</string>
+    <string name="cleaning_duty_dialog_yes_toast">Szuper!</string>
+    <string name="cleaning_duty_dialog_no">Nem</string>
+    <string name="cleaning_duty_dialog_done">Csillog a lakás! Holnap kezdeted elölről!</string>
 </resources>
