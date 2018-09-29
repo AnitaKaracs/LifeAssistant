@@ -7,9 +7,9 @@ import android.support.annotation.NonNull;
 
 import java.util.List;
 
-import hu.anita.lifeassistant.db.CleaningDuty;
-import hu.anita.lifeassistant.db.CleaningDutyDao;
-import hu.anita.lifeassistant.db.CleaningDutyDatabase;
+import hu.anita.lifeassistant.cleaningduty.db.CleaningDuty;
+import hu.anita.lifeassistant.cleaningduty.db.CleaningDutyDao;
+import hu.anita.lifeassistant.cleaningduty.db.CleaningDutyDatabase;
 
 public class CleaningDutyViewModel extends AndroidViewModel {
     private CleaningDutyDao cleaningDutyDao;

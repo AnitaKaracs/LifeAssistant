@@ -1,4 +1,4 @@
-package hu.anita.lifeassistant.db;
+package hu.anita.lifeassistant.cleaningduty.db;
 
 import android.arch.persistence.room.TypeConverter;
 
@@ -23,6 +23,9 @@ public class DateTimeConverter {
 
     @TypeConverter
     public static long toTimestamp(LocalDateTime date) {
+        if (date == null) {
+            return 0L;
+        }
         return date.toInstant(ZoneOffset.UTC).toEpochMilli();
     }
 }

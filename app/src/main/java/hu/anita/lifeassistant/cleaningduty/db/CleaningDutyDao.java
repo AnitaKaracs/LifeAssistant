@@ -1,4 +1,4 @@
-package hu.anita.lifeassistant.db;
+package hu.anita.lifeassistant.cleaningduty.db;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
@@ -15,6 +15,9 @@ import java.util.List;
 public interface CleaningDutyDao {
     @Query("SELECT * FROM cleaning_duties")
     LiveData<List<CleaningDuty>> getAll();
+
+    @Query("SELECT * FROM cleaning_duties WHERE checked = 1")
+    List<CleaningDuty> getDoneChores();
 
     @Update(onConflict = OnConflictStrategy.IGNORE)
     void update(CleaningDuty cleaningDuty);

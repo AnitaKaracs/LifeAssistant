@@ -9,4 +9,11 @@
     <string name="cleaning_duty_dialog_yes_toast">Szuper!</string>
     <string name="cleaning_duty_dialog_no">Nem</string>
     <string name="cleaning_duty_dialog_done">Csillog a lakás! Holnap kezdeted elölről!</string>
+    <string name="cleaning_duty_reminder_title">Napi emlékeztető</string>
+    <string name="cleaning_duty_reminder_message">Bár késő van, de jó lenne egy kis rendrakás!</string>
+    <string name="cleaning_duty_update_title">%s adatok frissítése</string>
+    <string name="cleaning_duty_update_minutes">perc</string>
+    <string name="cleaning_duty_update_details_hint">Részletek</string>
+    <string name="cleaning_duty_update_save">Mentés</string>
+    <string name="cleaning_duty_update_cancel">Mégse</string>
 </resources>

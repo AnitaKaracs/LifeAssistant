@@ -1,4 +1,4 @@
-package hu.anita.lifeassistant.db;
+package hu.anita.lifeassistant.cleaningduty.db;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;

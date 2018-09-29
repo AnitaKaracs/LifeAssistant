@@ -2,11 +2,14 @@ package hu.anita.lifeassistant.cleaningduty;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
@@ -15,9 +18,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import hu.anita.lifeassistant.R;
-import hu.anita.lifeassistant.db.CleaningDuty;
-import hu.anita.lifeassistant.db.CleaningDutyDao;
-import hu.anita.lifeassistant.db.CleaningDutyDatabase;
+import hu.anita.lifeassistant.cleaningduty.db.CleaningDuty;
+import hu.anita.lifeassistant.cleaningduty.db.CleaningDutyDao;
+import hu.anita.lifeassistant.cleaningduty.db.CleaningDutyDatabase;
 
 public class CleaningDutyAdapter extends RecyclerView.Adapter<CleaningDutyAdapter.CleaningDutyViewHolder> {
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd. HH:mm");
@@ -62,12 +65,11 @@ public class CleaningDutyAdapter extends RecyclerView.Adapter<CleaningDutyAdapte
             holder.cleaningDutyButton.setEnabled(!cleaningDuty.checked);
             holder.cleaningDutyButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 if (isChecked && buttonView.getId() == cleaningDuty.id && !cleaningDuty.checked) {
-                    /*DialogFragment dialogFragment = DirectorSaveDialogFragment.newInstance(director.fullName);
-                    dialogFragment.show(((AppCompatActivity) context).getSupportFragmentManager(), TAG_DIALOG_DIRECTOR_SAVE);*/
 
                     new AlertDialog.Builder(context)
                             .setTitle(R.string.cleaning_duty_dialog_title)
                             .setMessage(context.getString(R.string.cleaning_duty_dialog_message, cleaningDuty.name))
+                            .setCancelable(false)
                             .setPositiveButton(R.string.cleaning_duty_dialog_yes, (dialog, whichButton) -> {
                                 cleaningDuty.checkedTime = LocalDateTime.now();
                                 cleaningDuty.checked = true;
@@ -87,6 +89,12 @@ public class CleaningDutyAdapter extends RecyclerView.Adapter<CleaningDutyAdapte
                 }
             });
         }
+
+        holder.cleaningDutyUpdateButton.setOnLongClickListener(view -> {
+            DialogFragment dialogFragment = CleaningDutyUpdateFragment.newInstance(cleaningDuty);
+            dialogFragment.show(((AppCompatActivity) context).getSupportFragmentManager(), CleaningDutyUpdateFragment.TAG_CLEANING_DUTY_SAVE);
+            return false;
+        });
     }
 
     @NonNull
@@ -114,11 +122,13 @@ public class CleaningDutyAdapter extends RecyclerView.Adapter<CleaningDutyAdapte
     
     static class CleaningDutyViewHolder extends RecyclerView.ViewHolder {
         private CheckBox cleaningDutyButton;
+        private Button cleaningDutyUpdateButton;
 
         public CleaningDutyViewHolder(View itemView) {
             super(itemView);
 
             cleaningDutyButton = itemView.findViewById(R.id.cleaningDutyButton);
+            cleaningDutyUpdateButton = itemView.findViewById(R.id.cleaningDutyUpdateButton);
         }
     }
 }
