@@ -58,7 +58,7 @@ public class CleaningDutyNotificationHelper extends ContextWrapper {
     }
 
     public static void postNotification(PendingIntent intent) {
-        if (instance.hasUndoneChoresToday()) {
+        if (instance != null && instance.hasUndoneChoresToday()) {
             instance.getManager().notify(NOTIFICATION_ID, buildNotification(intent));
         }
     }

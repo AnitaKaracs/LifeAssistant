@@ -6,7 +6,6 @@ package hu.anita.lifeassistant.cleaningduty.db;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
@@ -42,7 +41,6 @@ public class CleaningDuty implements Serializable {
 
     @ColumnInfo(name = "details")
     @Nullable
-    @Ignore
     public String details;
 
     @Override
