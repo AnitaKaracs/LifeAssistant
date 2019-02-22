@@ -54,6 +54,7 @@ public class CleaningDutyUpdateFragment extends DialogFragment {
         View view = getActivity().getLayoutInflater().inflate(R.layout.cleaning_duty_update_dialog, null);
         final EditText timeRequiredField = view.findViewById(R.id.cleaningDutyUpdateTimeRequired);
         final EditText detailsField = view.findViewById(R.id.cleaningDutyUpdateDetails);
+        final EditText expirationField = view.findViewById(R.id.cleaningDutyUpdateExpiration);
 
         if (updatableCleaningDuty != null) {
             if (updatableCleaningDuty.timeRequiredMin != null) {
@@ -62,6 +63,12 @@ public class CleaningDutyUpdateFragment extends DialogFragment {
                 timeRequiredField.setText("1");
             }
             timeRequiredField.setSelection(0, timeRequiredField.getText().toString().length());
+
+            if (updatableCleaningDuty.expiration != null) {
+                expirationField.setText(String.valueOf(updatableCleaningDuty.expiration));
+            } else {
+                expirationField.setText("14");
+            }
             detailsField.setText(updatableCleaningDuty.details);
         }
 
@@ -70,7 +77,8 @@ public class CleaningDutyUpdateFragment extends DialogFragment {
                 .setPositiveButton(R.string.cleaning_duty_update_save,
                         (dialog, which) -> {
                             updatableCleaningDuty.timeRequiredMin = Integer.valueOf(timeRequiredField.getText().toString());
-                            updatableCleaningDuty.details = timeRequiredField.getText().toString();
+                            updatableCleaningDuty.details = detailsField.getText().toString();
+                            updatableCleaningDuty.expiration = Integer.valueOf(expirationField.getText().toString());
                             cleaningDutyDao.update(updatableCleaningDuty);
                         })
                 .setNegativeButton(R.string.cleaning_duty_update_cancel,

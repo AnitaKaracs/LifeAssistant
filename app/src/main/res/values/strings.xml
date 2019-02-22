@@ -12,7 +12,10 @@
     <string name="cleaning_duty_reminder_title">Napi emlékeztető</string>
     <string name="cleaning_duty_reminder_message">Bár késő van, de jó lenne egy kis rendrakás!</string>
     <string name="cleaning_duty_update_title">%s adatok frissítése</string>
+    <string name="cleaning_duty_update_time_required">Átl. idő:</string>
     <string name="cleaning_duty_update_minutes">perc</string>
+    <string name="cleaning_duty_update_expiration">Újrajelzés:</string>
+    <string name="cleaning_duty_update_expiration_day">nap</string>
     <string name="cleaning_duty_update_details_hint">Részletek</string>
     <string name="cleaning_duty_update_save">Mentés</string>
     <string name="cleaning_duty_update_cancel">Mégse</string>

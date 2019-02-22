@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 21);
-        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.HOUR_OF_DAY, 20);
+        calendar.set(Calendar.MINUTE, 30);
         calendar.set(Calendar.SECOND, 0);
 
         AlarmManager alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //TODO highlight ha elég régen volt a latest check
     //TODO details megjelenítése a name alatt kicsi betűvel
     //TODO menü kialakítása: health, cleaning, napi tanács
     //TODO health-en belül vérnyomás adatok rögzítése, citológiák ideje, kórtörténet testrészenként?

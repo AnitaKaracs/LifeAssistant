@@ -11,7 +11,7 @@ import hu.anita.lifeassistant.cleaningduty.db.helper.AssetSQLiteOpenHelperFactor
  * Created by Anita on 2018.08.30..
  */
 
-@Database(entities = {CleaningDuty.class}, version = 3)
+@Database(entities = {CleaningDuty.class}, version = 5)
 public abstract class CleaningDutyDatabase extends RoomDatabase {
     public abstract CleaningDutyDao cleaningDutyDao();
     private static CleaningDutyDatabase INSTANCE;

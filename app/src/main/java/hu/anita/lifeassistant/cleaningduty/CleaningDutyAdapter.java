@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -37,7 +38,20 @@ public class CleaningDutyAdapter extends RecyclerView.Adapter<CleaningDutyAdapte
 
     public void setCleaningDutyList(List<CleaningDuty> cleaningDutyList) {
         this.cleaningDutyList = cleaningDutyList;
+        checkExpiration();
         notifyDataSetChanged();
+    }
+
+    private void checkExpiration() {
+        this.cleaningDutyList.stream()
+                .filter(cleaningDuty -> cleaningDuty.checkedTime != null)
+                .filter(cleaningDuty ->
+                        cleaningDuty.checkedTime.toLocalDate().compareTo(LocalDate.now().minusDays(cleaningDuty.expiration)) < 0)
+                .forEach(cleaningDuty -> {
+                    cleaningDuty.checked = false;
+                    cleaningDuty.checkedTime = null;
+                    cleaningDutyDao.update(cleaningDuty);
+                });
     }
 
     @Override
@@ -72,6 +86,7 @@ public class CleaningDutyAdapter extends RecyclerView.Adapter<CleaningDutyAdapte
                             .setCancelable(false)
                             .setPositiveButton(R.string.cleaning_duty_dialog_yes, (dialog, whichButton) -> {
                                 cleaningDuty.checkedTime = LocalDateTime.now();
+                                cleaningDuty.latestCheck = LocalDateTime.now();
                                 cleaningDuty.checked = true;
                                 cleaningDutyDao.update(cleaningDuty);
 

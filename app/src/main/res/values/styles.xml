@@ -16,4 +16,8 @@
         <item name="android:minHeight">26dp</item>
     </style>
 
+    <style name="updateCleaningDuty">
+        <item name="android:textSize">18sp</item>
+    </style>
+
 </resources>
