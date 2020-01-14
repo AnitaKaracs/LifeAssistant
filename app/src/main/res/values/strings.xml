@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Life Assistant</string>
+    <string name="menu_cleaning">Takarítás</string>
+    <string name="menu_health">Egészség</string>
+    <string name="menu_tips">Napi tanács</string>
     <string name="cleaning_duty_unchecked">- %s perc</string>
     <string name="cleaning_duty_checked">(%s)</string>
     <string name="cleaning_duty_label">%s %s</string>

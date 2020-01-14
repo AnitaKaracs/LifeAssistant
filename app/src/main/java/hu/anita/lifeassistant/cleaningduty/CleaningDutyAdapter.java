@@ -1,6 +1,7 @@
 package hu.anita.lifeassistant.cleaningduty;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
@@ -16,7 +17,9 @@ import android.widget.Toast;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Objects;
 
 import hu.anita.lifeassistant.R;
 import hu.anita.lifeassistant.cleaningduty.db.CleaningDuty;
@@ -72,11 +75,22 @@ public class CleaningDutyAdapter extends RecyclerView.Adapter<CleaningDutyAdapte
         }
 
         final CleaningDuty cleaningDuty = cleaningDutyList.get(position);
-        if (cleaningDuty != null) {
+        if (Objects.nonNull(cleaningDuty)) {
             holder.cleaningDutyButton.setId(cleaningDuty.id);
             holder.cleaningDutyButton.setText(getCleaningDutyLabel(cleaningDuty));
             holder.cleaningDutyButton.setChecked(cleaningDuty.checked);
             holder.cleaningDutyButton.setEnabled(!cleaningDuty.checked);
+
+            if (!cleaningDuty.checked && Objects.nonNull(cleaningDuty.latestCheck) && Objects.nonNull(cleaningDuty.expiration)) {
+                long daysFromLatestCheck = ChronoUnit.DAYS.between(LocalDate.now(), cleaningDuty.latestCheck);
+                float cleaningIsNeededPercent = daysFromLatestCheck / cleaningDuty.expiration * 100;
+
+                int cleaningIsNeededColor = defineCleaningIsNeededColor(cleaningIsNeededPercent);
+                if (cleaningIsNeededColor > 0) {
+                    holder.cleaningDutyButton.setBackgroundColor(cleaningIsNeededColor);
+                }
+            }
+
             holder.cleaningDutyButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 if (isChecked && buttonView.getId() == cleaningDuty.id && !cleaningDuty.checked) {
 
@@ -110,6 +124,22 @@ public class CleaningDutyAdapter extends RecyclerView.Adapter<CleaningDutyAdapte
             dialogFragment.show(((AppCompatActivity) context).getSupportFragmentManager(), CleaningDutyUpdateFragment.TAG_CLEANING_DUTY_SAVE);
             return false;
         });
+    }
+
+    private int defineCleaningIsNeededColor(float cleaningIsNeededPercent) {
+        int cleaningIsNeededColor = 0;
+        if (cleaningIsNeededPercent > 200) {
+            cleaningIsNeededColor = Color.rgb(255, 71, 93);
+        } else if (cleaningIsNeededPercent > 150) {
+            cleaningIsNeededColor = Color.rgb(255, 110, 127);
+        } else if (cleaningIsNeededPercent > 100) {
+            cleaningIsNeededColor = Color.rgb(255, 140, 154);
+        } else if (cleaningIsNeededPercent > 75) {
+            cleaningIsNeededColor = Color.rgb(255, 158, 170);
+        } else if (cleaningIsNeededPercent > 50) {
+            cleaningIsNeededColor = Color.rgb(255, 181, 190);
+        }
+        return cleaningIsNeededColor;
     }
 
     @NonNull
