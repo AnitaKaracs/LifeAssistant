@@ -22,11 +22,10 @@
             android:textSize="18sp"
             android:gravity="center"
             android:textColor="#000"
-            android:text="Line 1"
+            android:text=""
             android:textStyle="bold"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/icon"
             android:layout_toEndOf="@+id/icon"
-            android:layout_marginTop="5dp"/>
+            android:layout_marginTop="10dp"/>
 
 </RelativeLayout>

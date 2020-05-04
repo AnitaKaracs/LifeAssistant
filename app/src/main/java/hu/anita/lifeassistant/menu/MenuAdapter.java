@@ -40,12 +40,10 @@ public class MenuAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view;
+        View view = convertView;
 
-        if (convertView == null) {
-            view = layoutInflater.inflate(R.layout.menu_item, null);
-        } else {
-            view = convertView;
+        if (view == null) {
+            view = layoutInflater.inflate(R.layout.menu_item, parent, false);
         }
 
         TextView titleView = view.findViewById(R.id.title);
@@ -56,4 +54,5 @@ public class MenuAdapter extends BaseAdapter {
 
         return view;
     }
+
 }

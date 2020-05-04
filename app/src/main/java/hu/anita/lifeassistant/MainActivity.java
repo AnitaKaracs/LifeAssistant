@@ -17,7 +17,6 @@ import java.util.Calendar;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
-    private Fragment shownFragment;
     private MenuService menuService;
 
     @Override
@@ -31,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         menuService = new MenuService(
                 this,
+                getSupportFragmentManager(),
                 findViewById(R.id.drawerLayout),
                 findViewById(R.id.menuPane),
                 findViewById(R.id.menuList));
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         menuService.populateMenu();
 
         if (savedInstanceState == null) {
-            showFragment(CleaningDutyFragment.newInstance());
+            menuService.showFragment(CleaningDutyFragment.newInstance());
             scheduleCleaningDutyNotification();
         }
     }
@@ -56,13 +56,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         menuService.syncToggleState();
-    }
-
-    private void showFragment(final Fragment fragment) {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragmentHolder, fragment)
-                .commitNow();
-        shownFragment = fragment;
     }
 
     private void scheduleCleaningDutyNotification() {
@@ -85,7 +78,11 @@ public class MainActivity extends AppCompatActivity {
 
     //TODO details megjelenítése a name alatt kicsi betűvel
     //TODO CRUD cleaning
-    //TODO funkciók közti váltás a menüben, health és tips implementálása
-    //TODO health-en belül vérnyomás adatok rögzítése, citológiák ideje, fogászat, kórtörténet testrészenként?
-    //TODO DB backup?
+    //TODO health implementálása
+    //TODO tips implementálása
+    //TODO health-en belül vérnyomás adatok rögzítése, citológiák ideje, fogászat, kórtörténet testrészenként
+    //TODO health: emberi test, unity-vel, színezés, mint a takarításnál, emlékeztetők
+    //TODO DB backup? Google auth?
+    //TODO ált. settings
+    //TODO i18n
 }

@@ -6,7 +6,6 @@
         android:id="@+id/menuPane"
         android:layout_gravity="start">
 
-        <!-- List of Actions (pages) -->
         <ListView
                 android:id="@+id/menuList"
                 android:layout_width="280dp"
