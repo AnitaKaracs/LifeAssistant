@@ -1,4 +1,4 @@
-package hu.anita.lifeassistant.cleaningduty.db;
+package hu.anita.lifeassistant.cleaningduty.db.helper;
 
 import android.arch.persistence.room.TypeConverter;
 

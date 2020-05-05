@@ -3,18 +3,21 @@
     <string name="menu_cleaning">Takarítás</string>
     <string name="menu_health">Egészség</string>
     <string name="menu_tips">Napi tanács</string>
+    <string name="menu_settings">Beállítások</string>
     <string name="cleaning_duty_unchecked">- %s perc</string>
     <string name="cleaning_duty_checked">(%s)</string>
     <string name="cleaning_duty_label">%s %s</string>
     <string name="cleaning_duty_dialog_title">Napi házimunka</string>
-    <string name="cleaning_duty_dialog_message">Meg is vagy a %s takarításával?</string>
+    <string name="cleaning_duty_on_check_confirm_message">Meg is vagy a %s takarításával?</string>
+    <string name="cleaning_duty_delete_confirm_message">Biztosan törlöd ezt a házimunkát: %s?</string>
+    <string name="cleaning_duty_delete_confirm_yes">%s törölve</string>
     <string name="cleaning_duty_dialog_yes">Igen</string>
     <string name="cleaning_duty_dialog_yes_toast">Szuper!</string>
     <string name="cleaning_duty_dialog_no">Nem</string>
-    <string name="cleaning_duty_dialog_done">Csillog a lakás! Holnap kezdeted elölről!</string>
     <string name="cleaning_duty_reminder_title">Napi emlékeztető</string>
     <string name="cleaning_duty_reminder_message">Bár késő van, de jó lenne egy kis rendrakás!</string>
-    <string name="cleaning_duty_update_title">%s adatok frissítése</string>
+    <string name="cleaning_duty_update_title">Házimunka adatok</string>
+    <string name="cleaning_duty_update_name_hint">Megnevezés</string>
     <string name="cleaning_duty_update_time_required">Átl. idő:</string>
     <string name="cleaning_duty_update_minutes">perc</string>
     <string name="cleaning_duty_update_expiration">Újrajelzés:</string>
@@ -22,4 +25,7 @@
     <string name="cleaning_duty_update_details_hint">Részletek</string>
     <string name="cleaning_duty_update_save">Mentés</string>
     <string name="cleaning_duty_update_cancel">Mégse</string>
+    <string name="cleaning_duty_edit_add">Új</string>
+    <string name="cleaning_duty_edit_modify">Módosítás</string>
+    <string name="cleaning_duty_edit_delete">Törlés</string>
 </resources>

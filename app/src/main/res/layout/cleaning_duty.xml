@@ -16,9 +16,10 @@
         android:autoSizeMaxTextSize="21sp"
         android:autoSizeStepGranularity="2sp"/>
 
-    <Button
-        android:id="@+id/cleaningDutyUpdateButton"
+    <TextView
+        android:id="@+id/cleaningDutyExpirationFlag"
         android:layout_width="10dp"
         android:layout_height="match_parent"
+        android:text=""
         android:background="@null" />
 </LinearLayout>

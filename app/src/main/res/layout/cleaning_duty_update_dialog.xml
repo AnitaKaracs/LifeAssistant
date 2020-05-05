@@ -5,7 +5,14 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <EditText
+            android:id="@+id/cleaningDutyUpdateName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/cleaning_duty_update_name_hint"
+            android:inputType="text" />
+
+    <LinearLayout
                   android:layout_width="match_parent"
                   android:layout_height="30dp"
                   android:layout_marginBottom="10dp"
@@ -19,7 +26,7 @@
                 android:layout_width="100dp"
                 android:layout_height="20dp" />
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <LinearLayout
                       android:layout_width="match_parent"
                       android:layout_height="match_parent"
                       android:orientation="horizontal"
@@ -40,7 +47,7 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
                   android:layout_width="match_parent"
                   android:layout_height="30dp"
                   android:layout_marginBottom="10dp"
@@ -53,7 +60,7 @@
                 android:layout_width="100dp"
                 android:layout_height="30dp" />
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <LinearLayout
                       android:layout_width="match_parent"
                       android:layout_height="match_parent"
                       android:orientation="horizontal"

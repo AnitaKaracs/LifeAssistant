@@ -5,7 +5,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import hu.anita.lifeassistant.cleaningduty.CleaningDutyFragment;
@@ -77,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //TODO details megjelenítése a name alatt kicsi betűvel
-    //TODO CRUD cleaning
     //TODO health implementálása
     //TODO tips implementálása
     //TODO health-en belül vérnyomás adatok rögzítése, citológiák ideje, fogászat, kórtörténet testrészenként

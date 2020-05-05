@@ -59,8 +59,7 @@ public class MenuService {
         menuItemList.add(new MenuItem(context.getString(R.string.menu_cleaning), R.drawable.chores, CleaningDutyFragment::new));
         menuItemList.add(new MenuItem(context.getString(R.string.menu_health),  R.drawable.chores, HealthFragment::new));
         menuItemList.add(new MenuItem(context.getString(R.string.menu_tips),  R.drawable.chores, CleaningDutyFragment::new));
-        menuItemList.add(new MenuItem(context.getString(R.string.menu_tips),  R.drawable.chores,
-            SettingsFragment::new));
+        menuItemList.add(new MenuItem(context.getString(R.string.menu_settings),  R.drawable.chores, SettingsFragment::new));
 
         MenuAdapter adapter = new MenuAdapter(context, menuItemList);
         menuView.setAdapter(adapter);
